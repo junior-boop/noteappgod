@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "HelloWorld",
-    "slug": "expo-template-default",
+    "name": "noteapp_god",
+    "slug": "noteappgod",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -9,13 +9,15 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.junior41.noteappgod"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.junior41.noteappgod"
     },
     "web": {
       "bundler": "metro",
@@ -36,6 +38,18 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5eb6db35-8a54-479d-b436-f15e4f6bc54d"
+      }
+    },
+    "owner": "junior41",
+    "updates": {
+      "url": "https://u.expo.dev/5eb6db35-8a54-479d-b436-f15e4f6bc54d"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   }
 }
