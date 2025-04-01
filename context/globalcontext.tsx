@@ -102,7 +102,7 @@ export default function GlobalContextProvider({ children }: { children: React.Re
     // }, [])
 
     const setDataNote = (note: NoteProps) => {
-        noteData?.filter(el => el.Id ==)
+        noteData?.filter(el => el.Id === note.Id)
     }
 
     const Note = { noteData, setDataNote }
