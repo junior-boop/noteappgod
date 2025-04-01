@@ -1,56 +1,128 @@
-import { Image, StyleSheet, Platform } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { Text } from '@/components/Themed';
+import Icones from '@/components/ui/IconesComponent';
+import { convert, w } from '@/constants/others';
+import { useRef } from 'react';
+import { Animated, Image, ScrollView, StatusBar, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import GrandItem from '../_components/firstItems';
+import Onglet from '../_components/onglets';
 
 export default function HomeScreen() {
+  const color = "#64748b";
+  const scrolling = useRef(new Animated.Value(0)).current;
+  const transition = scrolling.interpolate({
+    inputRange: [convert(0), convert(90)],
+    outputRange: [0, -convert(90)],
+    extrapolate: "clamp",
+  });
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <SafeAreaView className='flex-1 bg-[#f8fafc]'>
+      <StatusBar barStyle={'dark-content'} backgroundColor={'white'} />
+      <Animated.View
+        style={{
+          height: convert(92 + 42),
+          width: w,
+          backgroundColor: "white",
+          position: "absolute",
+          top: 28,
+          left: 0,
+          zIndex: 10,
+          transform: [
+            {
+              translateY: transition,
+            },
+          ],
+        }}>
+        <View
+          style={{
+            height: convert(92),
+            width: w,
+            paddingHorizontal: convert(16),
+            alignItems: "flex-end",
+            paddingBottom: 10,
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+            <Image
+              source={require("../../assets/images/icon.png")}
+              style={{
+                height: convert(32),
+                width: convert(32),
+                resizeMode: "contain",
+              }}
+            />
+            <Text fontWeight='600' style={{ fontSize: 24, flexDirection: 'row', alignItems: 'center', lineHeight: 28, marginBottom: -6 }}>
+              Nuvels
+            </Text>
+          </View>
+          <TouchableOpacity
+            // onPress={() => {
+            //   router.navigate('/account/index')
+            // }
+            // }
+            style={{
+              width: 36,
+              aspectRatio: 1,
+              borderRadius: 36,
+              borderWidth: 2,
+              borderColor: color,
+              justifyContent: "center",
+              alignItems: "center",
+            }}>
+            <Icones name='amen' size={20} />
+
+          </TouchableOpacity>
+        </View>
+        <ScrollView
+
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          style={{ height: convert(42), width: w }}
+          centerContent={true}
+          pagingEnabled={true}
+          snapToAlignment='center'
+          contentInsetAdjustmentBehavior='automatic'
+          contentContainerStyle={{ paddingHorizontal: 20, gap: 16 }}>
+          <Onglet label='Pour vous' />
+          <Onglet label='Nouveautés' />
+
+        </ScrollView>
+      </Animated.View>
+      <Animated.ScrollView
+        onScroll={Animated.event(
+          [
+            {
+              nativeEvent: {
+                contentOffset: {
+                  y: scrolling,
+                },
+              },
+            },
+          ],
+          { useNativeDriver: true }
+        )}
+        bounces={true}
+        showsVerticalScrollIndicator={false}
+        className={'flex-1 bg-[#f8fafc]'}>
+        <View style={{ height: convert(92 + 42), width: w }}></View>
+
+        <GrandItem />
+        {/* <LittleItem />
+        <LittleItem />
+        <LittleItem /> */}
+        {/* <LittleItem />
+        <Decouvert />
+        <LittleItem />
+        <LittleItem />
+        <LittleItem />
+        <LittleItem />
+        <LittleItem />
+        <LittleItem /> */}
+        <View style={{ height: 2000, width: "100%" }}></View>
+      </Animated.ScrollView>
+    </SafeAreaView>
   );
 }
 
