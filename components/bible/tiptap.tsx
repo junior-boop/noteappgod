@@ -14,7 +14,7 @@ import BibleVerset from './Extension-bible'
 import NoteExtension from './Extension-note'
 import TitleExtension from "./Extension-title"
 
-import '@/global.css'
+import '../../global.css'
 // define your extension array
 const extensions = [
     StarterKit.configure({
