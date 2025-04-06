@@ -15,7 +15,6 @@ import NoteExtension from './Extension-note'
 import TitleExtension from "./Extension-title"
 
 import '@/global.css'
-import './index.css'
 // define your extension array
 const extensions = [
     StarterKit.configure({
